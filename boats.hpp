@@ -5,12 +5,12 @@
 
 class Boats :public Widgets{
 protected:
-
+bool nyom;
 public:
     Boats(Window *w,int x,int y,int sx,int sy);
-    void draw();
-    bool focus(genv::event ev);
-    void move();
+    virtual void draw();
+    virtual bool focus(genv::event ev);
+    virtual void exec(genv::event ev);
 
 };
 

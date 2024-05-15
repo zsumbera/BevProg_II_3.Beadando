@@ -11,7 +11,7 @@ protected:
     int _x,_y,_sx,_sy;
 public:
     Widgets(Window *w,int x,int y,int sx,int sy);
-virtual bool focus(int px,int py);
+virtual bool focus(genv::event ev);
 virtual void draw();
 virtual void exec(genv::event ev);
 };

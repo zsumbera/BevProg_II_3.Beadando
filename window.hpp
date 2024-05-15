@@ -15,6 +15,7 @@ public:
     void _addwidget(Widgets *widget) {w.push_back(widget);}
     void loop();
     void start();
+    void update();
 };
 
 

@@ -17,3 +17,9 @@ void Map::draw() {
     }
 }
 
+bool Map::focus(event ev) {
+    if (_x<ev.pos_x && _x+_sx>ev.pos_x && _y<ev.pos_y && _y+_sy>ev.pos_y && ev.button==btn_left)
+        return _f = true;
+    else return _f= false;
+}
+

@@ -10,6 +10,7 @@ genv::canvas c;
 public:
     Map(Window *w,int x,int y,int sx,int sy);
     virtual void draw();
+    virtual bool focus(genv::event ev);
 };
 
 

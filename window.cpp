@@ -1,6 +1,7 @@
 #include "window.hpp"
 #include "/Users/zsumberaoliver/Desktop/ITK_graphicslib-master/graphics.hpp"
 #include "widgets.hpp"
+#include <iostream>
 
 using namespace genv;
 using namespace std;
@@ -13,29 +14,22 @@ Window::Window(int XX,int YY): w(w){
 void Window::loop() {
 event ev;
     int f = -1;
-    start();
-    while (gin>>ev){
 
+    while (gin>>ev){
+        update();
+        start();
         for (int i=0;i<w.size();i++) {
             if (ev.button == btn_left){
-                if (w[i]->focus(ev.pos_x, ev.pos_y)) {
+                if (w[i]->focus(ev)) {
                     f = i;
                 }
             }
-
-            w[i]->draw();
         }
-
         if(f!=-1) {
             w[f]->exec(ev);
+            w[f]->draw();
         }
-        else{
-            f=-1;
-        }
-        for (int i = 0; i < w.size(); ++i) {
-            w[i]->draw();
-        }
-
+        f=-1;
         gout<<refresh;
     }
 }
@@ -45,5 +39,8 @@ event ev;
             w[i]->draw();
         }
 
-        gout<<refresh;
+
     }
+    void Window::update(){
+    gout<<move_to(0,0)<<color(0,0,0)<<box(1200,900);
+}

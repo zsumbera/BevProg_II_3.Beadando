@@ -1,6 +1,3 @@
-//
-// Created by Zsumbera Olivér on 10/05/2024.
-//
 #include "/Users/zsumberaoliver/Desktop/ITK_graphicslib-master/graphics.hpp"
 #include "widgets.hpp"
 #include "window.hpp"
@@ -12,8 +9,10 @@ Widgets::Widgets(Window *w,int x,int y,int sx,int sy) : _x(x),_y(y),_sx(sx),_sy(
     w->_addwidget(this);
 }
 
-bool Widgets::focus(int px, int py) {
-    return _f;
+bool Widgets::focus(event ev) {
+    if (_x<ev.pos_x && _x+_sx>ev.pos_x && _y<ev.pos_y && _y+_sy>ev.pos_y)
+        return _f = true;
+    else return _f= false;
 }
 
 void Widgets::draw() {
