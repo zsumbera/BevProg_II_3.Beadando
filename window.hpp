@@ -3,17 +3,20 @@
 #include "/Users/zsumberaoliver/Desktop/ITK_graphicslib-master/graphics.hpp"
 #include <vector>
 #include "widgets.hpp"
+#include "map.hpp"
 
 class Widgets;
 
 class Window {
 protected:
     std::vector<Widgets*> w;
+    bool isStarted;
 public:
     Window(int XX,int YY);
 
     void _addwidget(Widgets *widget) {w.push_back(widget);}
-    void loop();
+    void startloop();
+    void gameloop();
     void start();
     void update();
 };

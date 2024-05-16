@@ -5,13 +5,15 @@
 
 class Boats :public Widgets{
 protected:
-bool nyom;
+    std::vector<Map*> _m;
+    int _s;
+    bool hold=true;
 public:
-    Boats(Window *w,int x,int y,int sx,int sy);
+    Boats(Window *w,int x,int y,int sx,int sy,int s,std::vector<Map*> &m);
     virtual void draw();
     virtual bool focus(genv::event ev);
-    virtual void exec(genv::event ev);
-
+    virtual void exec(genv::event ev,bool &isStarted);
+    void snap();
 };
 
 

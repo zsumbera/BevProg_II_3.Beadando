@@ -1,11 +1,13 @@
 #include "/Users/zsumberaoliver/Desktop/ITK_graphicslib-master/graphics.hpp"
 #include "widgets.hpp"
+
+#include <utility>
 #include "window.hpp"
 
 using namespace genv;
 using namespace std;
 
-Widgets::Widgets(Window *w,int x,int y,int sx,int sy) : _x(x),_y(y),_sx(sx),_sy(sy) {
+Widgets::Widgets(Window *w,int x,int y,int sx,int sy) : _x(x),_y(y),_sx(sx),_sy(sy){
     w->_addwidget(this);
 }
 
@@ -17,7 +19,6 @@ bool Widgets::focus(event ev) {
 
 void Widgets::draw() {
 }
-void Widgets::exec(event ev) {
 
-
+void Widgets::exec(genv::event ev,bool &isStarted) {
 }
