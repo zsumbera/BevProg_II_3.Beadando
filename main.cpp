@@ -3,6 +3,8 @@
 #include "window.hpp"
 #include "map.hpp"
 #include "boats.hpp"
+#include "simplelist.hpp"
+#include "pushbutton.hpp"
 
 using namespace std;
 using namespace genv;
@@ -15,13 +17,8 @@ class Widgets;
 
 int main() {
    Window *window = new Window(XX,YY);
-   Map * map = new Map(window,500,100,650,650);
-   Boats * smboat = new Boats(window,50,130,120,55);
-    Boats * mboat = new Boats(window,50,200,240,55);
-    Boats * lboat = new Boats(window,50,270,300,55);
-    Boats * xlboat = new Boats(window,50,330,360,55);
 
-   window->loop();
+   window->startloop();
 
     return 0;
 }

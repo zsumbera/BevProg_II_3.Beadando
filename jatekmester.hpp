@@ -1,12 +1,17 @@
-//
-// Created by Zsumbera Olivér on 10/05/2024.
-//
-
+#include "/Users/zsumberaoliver/Desktop/ITK_graphicslib-master/graphics.hpp"
 #ifndef BEADANDO3_JATEKMESTER_HPP
 #define BEADANDO3_JATEKMESTER_HPP
 
 
-class jatekmester {
+class Jatekmester {
+protected:
+
+public:
+    Jatekmester();
+
+    bool isLegal(genv::event e);
+    int isHit(bool isReserved);
+    bool isSink(genv::event e);
 
 };
 
