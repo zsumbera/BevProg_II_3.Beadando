@@ -1,14 +1,21 @@
-//
-// Created by Zsumbera Olivér on 10/05/2024.
-//
+#ifndef BEADANDO2_SIMPLELIST_HPP
+#define BEADANDO2_SIMPLELIST_HPP
+#include "widgets.hpp"
+#include "/Users/zsumberaoliver/Desktop/ITK_graphicslib-master/graphics.hpp"
 
-#ifndef BEADANDO3_SIMPLELIST_HPP
-#define BEADANDO3_SIMPLELIST_HPP
+class Simplelist : public Widgets {
+protected:
+    bool _f;
+    std::string current;
+    std::vector<std::string> _contents;
+public:
+    Simplelist(Window *a,int x,int y, int sx,int sy,std::vector<std::string>contents);
 
-
-class simplelist {
-
+    virtual void draw();
+    virtual bool focus(genv::event ev);
+    virtual void exec(genv::event ev);
+    virtual std::string push_back();
 };
 
 
-#endif //BEADANDO3_SIMPLELIST_HPP
+#endif //BEADANDO2_SIMPLELIST_HPP
