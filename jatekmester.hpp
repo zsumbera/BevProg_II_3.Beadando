@@ -11,7 +11,7 @@ public:
 
     bool isLegal(genv::event e);
     int isHit(bool isReserved);
-    bool isSink(genv::event e);
+    bool isSink();
 
 };
 

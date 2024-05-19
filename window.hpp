@@ -12,7 +12,10 @@ class Window {
 protected:
     std::vector<Widgets*> w;
     std::vector<Map*> mp;
+    std::vector<Map*> m;
+    std::vector<std::string> list1 = {"Sima lövés","Bomba"};
     bool isStarted;
+    bool turn;
 public:
     Window(int XX,int YY);
 

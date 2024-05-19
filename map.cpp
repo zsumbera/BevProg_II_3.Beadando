@@ -12,7 +12,10 @@ Map::Map(Window *w,int x,int y,int sx,int sy,bool bot,bool isreserved) : Widgets
 void Map::draw() {
         gout << move_to(_x, _y) << color(51, 51, 255) << box_to(_x + _sx, _y + _sy);
         gout << move_to(_x + 1, _y + 1) << color(0, 0, 0) << box_to(_x + _sx - 2, _y + _sy - 2) << move_to(_x, _y);
-    Shoot();
+        Shoot();
+        if(_isreserved){
+            gout << move_to(_x, _y) << color(255, 255, 255) << box_to(_x + _sx, _y + _sy);
+        }
 }
 
 bool Map::focus(event ev) {
@@ -23,6 +26,9 @@ bool Map::focus(event ev) {
         return _f= false;
     }
 }
+bool Map::botFocus(){
+    return _f = true;
+}
 void Map::exec(genv::event ev, bool &isStarted) {
     Jatekmester j;
     if (isStarted && _f && _bot){
@@ -30,11 +36,14 @@ void Map::exec(genv::event ev, bool &isStarted) {
         if (j.isHit(isReserved())&&ev.button==btn_left){
             _hit = j.isHit(isReserved());
             cerr<<"Hit! ";
-            if (j.isSink(ev)){
+            if (j.isSink()){
                 cerr<<"Sink ";
             }
         }
 
+    } else if(!_bot && _f && isStarted){
+        _hit = j.isHit(isReserved());
+        cerr<<"Hajjaaa";
     }
 
 }

@@ -9,11 +9,13 @@ protected:
     bool _bot;
     bool _isreserved;
     int _hit =0;
+    bool _isboat = false;
 public:
     Map(Window *w,int x,int y,int sx,int sy,bool bot,bool isreserved);
     virtual void draw();
     virtual bool focus(genv::event ev);
     void exec(genv::event ev,bool &isStarted);
+    bool botFocus();
     void Reserve();
     void Shoot();
     int getPx();

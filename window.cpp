@@ -5,6 +5,7 @@
 #include "simplelist.hpp"
 #include "pushbutton.hpp"
 #include "boats.hpp"
+#include "bot.hpp"
 #include <random>
 
 using namespace genv;
@@ -31,6 +32,7 @@ Window::Window(int XX,int YY): w(w){
 
 void Window::startloop() {
 event ev;
+Boats *k = new Boats(this,0,0,0,0,0,mp);
     int f = -1;
     while (gin>>ev){
         update();
@@ -48,6 +50,7 @@ event ev;
         }
         gout<<refresh;
         if (isStarted){
+           mp =  k->returnvector();
             break;
         }
     }
@@ -56,10 +59,7 @@ event ev;
 void Window::gameloop() {
     event ev;
     update();
-    std::vector<string> list1 = {"Sima lövés","Bomba"};
     Simplelist * simple = new Simplelist(this,100,700,100,60,list1);
-    std::vector<Map*> m;
-    rand();
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 10; ++j) {
                 Map * map = new Map(this,50+j*50,100+i*50,50,50,true, false);
@@ -69,23 +69,42 @@ void Window::gameloop() {
     for (int i = 0; i <= 4; ++i) {
         int rnd = rand() % m.size();
         for (int j = 0; j < i; ++j) {
-            m[rnd+j]->Reserve();
+            if (!m[rnd+j]->isReserved()){
+                m[rnd+j]->Reserve();
+            }
         }
 
     }
     int f = -1;
     start();
     while (gin>>ev){
-        for (int i=0;i<w.size();i++) {
-            if (ev.button == btn_left && w[i]->focus(ev)){
-                f = i;
+        if (turn){
+            for (int i=0;i<m.size();i++) {
+                if (ev.button == btn_left && m[i]->focus(ev)){
+                    f = i;
+                    turn = false;
+                }
             }
+            if(f!=-1) {
+
+                m[f]->exec(ev,isStarted);
+                m[f]->draw();
+            }
+
+            gout<<refresh;
+        } else{
+            gin.timer(100000);
+            int botshot = 0;
+            while(mp[botshot = rand() % mp.size()]->isReserved()){}
+
+            mp[botshot]->botFocus();
+
+            mp[botshot]->exec(ev,isStarted);
+            mp[botshot]->draw();
+            turn = true;
+            gout<<refresh;
         }
-        if(f!=-1) {
-            w[f]->draw();
-            w[f]->exec(ev,isStarted);
-        }
-        gout<<refresh;
+
     }
 }
 

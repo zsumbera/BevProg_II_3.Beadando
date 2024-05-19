@@ -27,11 +27,11 @@ void Boats::exec(event ev,bool &isStarted) {
     if (!isStarted) {
         _x = ev.pos_x - _sx / 2;
         _y = ev.pos_y - _sy / 2;
-        snap();
+        snap(isStarted);
     }
 }
 
-void Boats::snap() {
+void Boats::snap(bool isStarted) {
 
     for (int i = 0; i < _m.size()-_s; ++i) {
 
@@ -39,10 +39,17 @@ void Boats::snap() {
                 _x=_m[i]->getPx()+3;
                 _y=_m[i]->getPy();
                 _f= false;
-                for (int j = 0; j < _s; ++j) {
-                    _m[i+j]->Reserve();
+                if (isStarted){
+                    for (int j = 0; j < _s; ++j) {
+                        _m[i+j]->Reserve();
+                    }
                 }
+
                 cerr<<"Oh Snap";
             }
         }
+}
+
+vector<Map*> Boats::returnvector(){
+    return _m;
 }

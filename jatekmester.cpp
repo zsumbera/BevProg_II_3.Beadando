@@ -1,6 +1,6 @@
 #include "jatekmester.hpp"
 #include "/Users/zsumberaoliver/Desktop/ITK_graphicslib-master/graphics.hpp"
-
+#include "window.hpp"
 Jatekmester::Jatekmester() {
 
 }
@@ -17,6 +17,6 @@ bool Jatekmester::isLegal(genv::event e) {
 
 }
 
-bool Jatekmester::isSink(genv::event e) {
+bool Jatekmester::isSink() {
 
 }

@@ -13,7 +13,8 @@ public:
     virtual void draw();
     virtual bool focus(genv::event ev);
     virtual void exec(genv::event ev,bool &isStarted);
-    void snap();
+    void snap(bool isStarted);
+    std::vector<Map*> returnvector();
 };
 
 
