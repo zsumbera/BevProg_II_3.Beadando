@@ -9,7 +9,6 @@ protected:
     bool _bot;
     bool _isreserved;
     int _hit =0;
-    bool _isboat = false;
 public:
     Map(Window *w,int x,int y,int sx,int sy,bool bot,bool isreserved);
     virtual void draw();

@@ -33,7 +33,7 @@ void Simplelist::draw() {
     }
 }
 bool Simplelist::focus(genv::event ev) {
-    if (ev.pos_x>_x+_sx && ev.pos_x<_x+_sx+20 && ev.pos_y>_y && ev.pos_y<_y+_sy ){
+    if (ev.pos_x>_x && ev.pos_x<_x+_sx && ev.pos_y>_y && ev.pos_y<_y+_sy ){
         _f=true;
     } else{
         _f= false;
@@ -42,7 +42,6 @@ bool Simplelist::focus(genv::event ev) {
 }
 //lista elemének kiválasztása
 void Simplelist::exec(genv::event ev) {
-   if (ev.button == btn_left){
    cerr<<"anyad";
         for (int i = 0; i < _contents.size(); ++i) {
             if (ev.pos_x > _x && ev.pos_x < _x+_sx && ev.pos_y < _y + i+1 * _sy && ev.pos_y > _sy) {
@@ -50,7 +49,6 @@ void Simplelist::exec(genv::event ev) {
                 cerr<<_contents[i];
                 break;
             }
-        }
    }
 }
 string Simplelist::push_back() {

@@ -1,16 +1,22 @@
 #include "/Users/zsumberaoliver/Desktop/ITK_graphicslib-master/graphics.hpp"
 #include "boats.hpp"
 #include <iostream>
+#include <utility>
 #include "map.hpp"
 
 using namespace std;
 using namespace genv;
 
-Boats::Boats(Window *w,int x,int y,int sx,int sy,int s,std::vector<Map*> &m) : Widgets(w,x,y,sx,sy),_s(s),_m(m){}
+Boats::Boats(Window *w,int x,int y,int sx,int sy,int s,std::vector<Map*> m) : Widgets(w,x,y,sx,sy),_s(s),_m(std::move(m)){}
 
 void Boats::draw() {
     for (int i = 0; i <= _s; ++i) {
         gout<<move_to(_x+i*_sx,_y)<<color(40,200,40)<<box_to(_x+_sx,_y+_sy);
+    }
+    for (int i = 0; i < _m.size(); ++i) {
+        if (_m[i]->isReserved()){
+            gout<<move_to(_x+i*_sx,_y)<<color(255,0,255)<<box_to(_x+_sx,_y+_sy);
+        }
     }
 
 }
@@ -39,14 +45,13 @@ void Boats::snap(bool isStarted) {
                 _x=_m[i]->getPx()+3;
                 _y=_m[i]->getPy();
                 _f= false;
-                if (isStarted){
-                    for (int j = 0; j < _s; ++j) {
-                        _m[i+j]->Reserve();
-                    }
-                }
-
                 cerr<<"Oh Snap";
             }
+        if (isStarted){
+            for (int j = 0; j < _s; ++j) {
+                _m[i+j]->Reserve();
+            }
+        }
         }
 }
 

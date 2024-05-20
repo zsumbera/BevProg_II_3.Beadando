@@ -9,7 +9,7 @@ protected:
     int _s;
     bool hold=true;
 public:
-    Boats(Window *w,int x,int y,int sx,int sy,int s,std::vector<Map*> &m);
+    Boats(Window *w,int x,int y,int sx,int sy,int s,std::vector<Map*> m);
     virtual void draw();
     virtual bool focus(genv::event ev);
     virtual void exec(genv::event ev,bool &isStarted);

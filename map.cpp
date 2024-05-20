@@ -13,9 +13,6 @@ void Map::draw() {
         gout << move_to(_x, _y) << color(51, 51, 255) << box_to(_x + _sx, _y + _sy);
         gout << move_to(_x + 1, _y + 1) << color(0, 0, 0) << box_to(_x + _sx - 2, _y + _sy - 2) << move_to(_x, _y);
         Shoot();
-        if(_isreserved){
-            gout << move_to(_x, _y) << color(255, 255, 255) << box_to(_x + _sx, _y + _sy);
-        }
 }
 
 bool Map::focus(event ev) {
@@ -32,7 +29,6 @@ bool Map::botFocus(){
 void Map::exec(genv::event ev, bool &isStarted) {
     Jatekmester j;
     if (isStarted && _f && _bot){
-
         if (j.isHit(isReserved())&&ev.button==btn_left){
             _hit = j.isHit(isReserved());
             cerr<<"Hit! ";
@@ -41,7 +37,7 @@ void Map::exec(genv::event ev, bool &isStarted) {
             }
         }
 
-    } else if(!_bot && _f && isStarted){
+    } else if(!_bot && _f && isStarted && j.isHit(isReserved())){
         _hit = j.isHit(isReserved());
         cerr<<"Hajjaaa";
     }
@@ -49,13 +45,15 @@ void Map::exec(genv::event ev, bool &isStarted) {
 }
 
 void Map::Shoot(){
-    if(_hit ==2){
+    if(_hit == 2){
         gout<<color(255,0,200)<<move_to(_x,_y)<<line_to(_x+_sx,_y+_sy)<<move_to(_x+_sx,_y)<<line_to(_x,_y+_sy);
     } else if(_hit == 1){
         gout<<color(0,255,0)<<move_to(_x,_y)<<line_to(_x+_sx,_y+_sy)<<move_to(_x+_sx,_y)<<line_to(_x,_y+_sy);
     }
 
 }
+
+
 void Map::Reserve(){
     _isreserved = true;
 }

@@ -32,7 +32,6 @@ Window::Window(int XX,int YY): w(w){
 
 void Window::startloop() {
 event ev;
-Boats *k = new Boats(this,0,0,0,0,0,mp);
     int f = -1;
     while (gin>>ev){
         update();
@@ -50,7 +49,11 @@ Boats *k = new Boats(this,0,0,0,0,0,mp);
         }
         gout<<refresh;
         if (isStarted){
-           mp =  k->returnvector();
+            Boats *b;
+
+            for (int i = 0; i < w.size(); ++i) {
+                w[i]->exec(ev,isStarted);
+            }
             break;
         }
     }
@@ -79,20 +82,20 @@ void Window::gameloop() {
     start();
     while (gin>>ev){
         if (turn){
-            for (int i=0;i<m.size();i++) {
-                if (ev.button == btn_left && m[i]->focus(ev)){
+            for (int i=0;i<w.size();i++) {
+                if (ev.button == btn_left && w[i]->focus(ev)){
                     f = i;
                     turn = false;
                 }
             }
             if(f!=-1) {
-
-                m[f]->exec(ev,isStarted);
-                m[f]->draw();
+                w[f]->exec(ev,isStarted);
+                w[f]->draw();
             }
 
             gout<<refresh;
-        } else{
+
+        } else if( ev.button == -btn_left){
             gin.timer(100000);
             int botshot = 0;
             while(mp[botshot = rand() % mp.size()]->isReserved()){}
